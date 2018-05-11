@@ -22,14 +22,17 @@ try:
     while True:
         # neutral
         sys.stdout.write('\r{}'.format('Neutral'))
+        sys.stdout.flush()
         pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(STOP_WIDTH, PERIOD))
         time.sleep(3)
         # CW
         sys.stdout.write('\r{}'.format('CW'))
+        sys.stdout.flush()
         pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(0.9, PERIOD))
         time.sleep(3)
         # CCW
         sys.stdout.write('\r{}'.format('CCW'))
+        sys.stdout.flush()
         pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(2.1, PERIOD))
         time.sleep(3)
 
