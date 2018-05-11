@@ -9,10 +9,10 @@ PERIOD = 20
 STOP_WIDTH = 1.5
 
 def period2freq(period):
-    return 1000 / period
+    return int(1000 / period)
 
 def width2duty(width, period):
-    return (width / period) * 1000000.0
+    return int((width / period) * 1000000)
 
 try:
     pi = pigpio.pi()
@@ -22,15 +22,15 @@ try:
     while True:
         # neutral
         sys.stdout.write('\r{}'.format('Neutral'))
-        pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(STOP_WIDTH))
+        pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(STOP_WIDTH, PERIOD))
         time.sleep(3)
         # CW
         sys.stdout.write('\r{}'.format('CW'))
-        pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(0.9))
+        pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(0.9, PERIOD))
         time.sleep(3)
         # CCW
         sys.stdout.write('\r{}'.format('CCW'))
-        pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(2.1))
+        pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(2.1, PERIOD))
         time.sleep(3)
 
 except KeyboardInterrupt:
