@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import pigpio
+import sys
 import time
 
 PWM_PIN = 18
@@ -20,13 +21,15 @@ try:
 
     while True:
         # neutral
-        print('Neutral')
+        sys.stdout.write('\r{}'.format('Neutral'))
         pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(STOP_WIDTH))
         time.sleep(3)
         # CW
+        sys.stdout.write('\r{}'.format('CW'))
         pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(0.9))
         time.sleep(3)
         # CCW
+        sys.stdout.write('\r{}'.format('CCW'))
         pi.hardware_PWM(PWM_PIN, period2freq(PERIOD), width2duty(2.1))
         time.sleep(3)
 
